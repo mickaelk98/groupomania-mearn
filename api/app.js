@@ -6,6 +6,9 @@ require("./config/db.config");
 const app = express();
 const port = 5000;
 
+// declaration des routes
+const authRoutes = require("./routes/Auth.routes");
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -24,6 +27,8 @@ app.use(cookie());
 
 // intercepte les requete json
 app.use(express.json());
+
+app.use("/api/auth", authRoutes);
 
 app.listen(port, () => {
   console.log("Serveur lancé sur le port: " + port);
