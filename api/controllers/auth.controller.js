@@ -1,5 +1,6 @@
 const User = require("../models/Users");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 // controller d'inscription
 exports.signup = async (req, res) => {
@@ -37,5 +38,43 @@ exports.signup = async (req, res) => {
     }
 
     res.status(404).json(errors);
+  }
+};
+
+// controller de connexion
+exports.login = async (req, res) => {
+  const { password } = req.body;
+
+  // recherche l'utilisateur dans la base de donnée
+  const user = await User.findOne({ email: req.body.email });
+
+  // si l'utilisateur n'existe pas
+  if (!user) {
+    return res.status(401).json({ email: "Cet utilisateur n'existe pas" });
+  } else {
+    const validPassword = await bcrypt.compare(password, user.password);
+
+    // si le mot de passe de la requete ne correspond pas a celui dans la base de donnée
+    if (!validPassword) {
+      return res.status(401).json({ password: "Mot de passe incorect" });
+    } else {
+      const token = jwt.sign({}, process.env.JWT_KEY, {
+        subject: user._id.toString(),
+        // validité du token (7 jours)
+        expiresIn: 3600 * 24 * 7,
+      });
+
+      // renvoi l'utilisateur et un token pour identifier chaque requete
+      res.cookie("token", token);
+      res.status(200).json({
+        _id: user._id,
+        userName: user.userName,
+        email: user.email,
+        image: user.image,
+        description: user.description,
+        isAdmin: user.isAdmin,
+        createdAt: user.createdAt,
+      });
+    }
   }
 };
