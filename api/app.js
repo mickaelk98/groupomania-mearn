@@ -6,7 +6,7 @@ require("./config/db.config");
 const app = express();
 const port = 5000;
 
-// declaration des routes
+//* declaration des routes
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
 
@@ -23,11 +23,14 @@ app.use((req, res, next) => {
   next();
 });
 
-// intercepte les coockies
+//* intercepte les coockies
 app.use(cookie());
 
-// intercepte les requete json
+//* intercepte les requete json
 app.use(express.json());
+
+//* permet de servir des images
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
