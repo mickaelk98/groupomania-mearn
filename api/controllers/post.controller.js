@@ -135,3 +135,43 @@ exports.updatePost = async (req, res) => {
     res.status(500).json({ message: "le post na pas pu etre modifié", e });
   }
 };
+
+// controller pour supprimer un post
+exports.deletePost = async (req, res) => {
+  try {
+    // recuperation de l'id du post
+    const { id } = req.params;
+
+    // recherche le post que l'on veut modifié dans la base de donnée
+    const post = await Post.findOne({ _id: id });
+
+    // si le post a été trouvé
+    if (post) {
+      // verifie si celui qui veut supprimer le post a les droits
+      if (req.auth !== post.posterId) {
+        return res.status(401).json({ message: "Requete non autorisé" });
+      }
+
+      // si le post que l'on veut supprimer avait une image
+      if (post.image) {
+        // recuperation du nom de l'image
+        const filename = post.image.split("/images/")[1];
+
+        fs.unlink(`images/${filename}`, async () => {
+          // suppression du post
+          await Post.deleteOne({ _id: id });
+          res.status(200).json({ message: "le post a été supprimé" });
+        });
+      }
+      // suppression du post
+      await Post.deleteOne({ _id: id });
+      res.status(200).json({ message: "le post a été supprimé" });
+    } else {
+      res
+        .status(404)
+        .json({ message: "Le post que vous voulez modifié na pas été trouvé" });
+    }
+  } catch (e) {
+    res.status(500).json({ message: "le post na pas pu etre supprimé", e });
+  }
+};
