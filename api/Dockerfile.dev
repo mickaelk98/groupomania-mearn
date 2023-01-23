@@ -1,0 +1,7 @@
+FROM node:lts
+WORKDIR /app
+COPY package.json .
+RUN npm install -g nodemon && npm install
+COPY . .
+# -- legacy-watch pour que nodemon fonction dans un conteneur
+CMD ["nodemon", "--legacy-watch", "server.js"]
