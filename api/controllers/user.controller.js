@@ -1,5 +1,6 @@
 const User = require("../models/Users");
 const fs = require("fs");
+const bcrypt = require("bcrypt");
 
 // controller pour recuperer tout les utilisateur
 exports.getAllUsers = async (req, res) => {
@@ -39,6 +40,7 @@ exports.getCurrentUser = async (req, res) => {
 //controller pour supprimer un utilisateur
 exports.deleteCurrentUser = async (req, res) => {
   try {
+    // recherche de l'utilisateur dans la base de donnée
     const user = await User.findOne({ _id: req.params.id });
 
     if (!user) {
@@ -68,5 +70,73 @@ exports.deleteCurrentUser = async (req, res) => {
   } catch (e) {
     // console.log(e);
     res.status(404).json(e);
+  }
+};
+
+// controller pour modifier un utilisateur
+exports.updateCurrentUser = async (req, res) => {
+  try {
+    const { password, email } = req.body;
+    const { id: userId } = req.params;
+    let userObject = {};
+
+    // recherche de l'utilisateur dans la base de donnée
+    const user = await User.findOne({ _id: userId });
+
+    if (!user) {
+      res.status(404).json({ message: "L'utilisateur n'existe pas" });
+    } else {
+      // verifie si celui qui fait la requte est celui qui a crée le profil
+      if (userId !== req.auth) {
+        res.status(401).json({ message: "Requete non autorisé" });
+      } else {
+        //recherche si l'email est déja utiisé
+        const emailAlreadyUsed = await User.findOne({ email: email });
+
+        if (emailAlreadyUsed) {
+          return res.status(404).json({ message: "L'émail est déja utilisé" });
+        }
+
+        // si l'on modifie le mot de passe
+        if (password) {
+          const hashedPassword = await bcrypt.hash(password, 10);
+          userObject = { password: hashedPassword, ...req.body };
+        } else {
+          userObject = { ...req.body };
+        }
+
+        // si l'on modifie l'image
+        if (req.file) {
+          // recuperation du nom de l'image
+          const filename = user.image.split("/images/")[1];
+
+          // ajout de la nouvelle image
+          userObject.image = `${req.protocol}://${req.get("host")}/images/${
+            req.file.filename
+          }`;
+
+          // suppression de l'ancienne image
+          fs.unlink(`images/${filename}`, () => {
+            updateAndSendNewUser();
+          });
+        } else {
+          //garde l'ancienne image
+          userObject.image = user.image;
+          updateAndSendNewUser();
+        }
+      }
+
+      // fonction qui met a jour et renvoie l'utilisateur
+      async function updateAndSendNewUser() {
+        // sauvegarde du nouvelle utilisateur
+        await User.updateOne({ _id: userId }, { ...userObject, _id: userId });
+
+        // recheche et renvoi de l'utilisateur une fois modifié
+        const newUser = await User.findOne({ _id: userId });
+        res.status(201).json(newUser);
+      }
+    }
+  } catch (e) {
+    res.status(500).json(e);
   }
 };
