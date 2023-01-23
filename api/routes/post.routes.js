@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const postCtrl = require("../controllers/post.controller");
+const likeCtrl = require("../controllers/like.controller");
 const auth = require("../middleware/auth");
 const multer = require("../config/multer.config");
 
@@ -15,5 +16,8 @@ router.put("/:id", auth, multer, postCtrl.updatePost);
 
 //* route pour supprimer un post
 router.delete("/:id", auth, postCtrl.deletePost);
+
+//* route like et dislike un post
+router.post("/like/:id", auth, likeCtrl.likePost);
 
 module.exports = router;
