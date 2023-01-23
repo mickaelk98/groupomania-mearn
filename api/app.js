@@ -10,6 +10,7 @@ const port = 5000;
 //* declaration des routes
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
+const postRoutes = require("./routes/post.routes");
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -35,6 +36,7 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/post", postRoutes);
 
 app.listen(port, () => {
   console.log("Serveur lancé sur le port: " + port);
