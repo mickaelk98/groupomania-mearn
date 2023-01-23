@@ -1,7 +1,7 @@
 const Post = require("../models/Posts");
 const User = require("../models/Users");
 
-// controller pour recuperer un utilisateur
+// controller pour créer un post
 exports.createPost = async (req, res) => {
   try {
     // recuperation de données de la requete
@@ -44,6 +44,17 @@ exports.createPost = async (req, res) => {
     const newPost = await post.save();
 
     res.status(201).json(newPost);
+  } catch (e) {
+    res.status(500).json({ message: "Le post n'a pas pu etre crée", e });
+  }
+};
+
+// controller pour recuperer tout les posts
+exports.getAllPosts = async (req, res) => {
+  try {
+    // recuperation des post dans la base de données
+    const posts = await Post.find();
+    res.status(200).json(posts);
   } catch (e) {
     res.status(500).json({ message: "Le post n'a pas pu etre crée", e });
   }
