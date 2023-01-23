@@ -10,4 +10,7 @@ router.post("/", auth, multer, postCtrl.createPost);
 //* routes pour recuperer tout les posts
 router.get("/", auth, postCtrl.getAllPosts);
 
+//* route pour mettre a jour un post
+router.put("/:id", auth, multer, postCtrl.updatePost);
+
 module.exports = router;
