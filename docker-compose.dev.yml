@@ -12,3 +12,23 @@ services:
         target: /app/node_modules
     ports:
       - 5000:80
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    volumes: 
+      - type: bind
+        source: ./client
+        target: /app
+      - type: volume
+        target: /app/node_modules
+    ports:
+      - 3000:3000
+  reverse-proxy:
+    build: 
+      context: ./reverse-proxy
+      dockerfile: Dockerfile.dev
+    ports:
+      - 80:80
+
+  

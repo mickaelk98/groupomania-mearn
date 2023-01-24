@@ -1,0 +1,14 @@
+input {
+  visibility: hidden;
+}
+
+label {
+  border: 1px solid salmon;
+  color: salmon;
+  padding: 10px;
+  cursor: pointer;
+}
+
+span i {
+  margin-right: 10px;
+}
