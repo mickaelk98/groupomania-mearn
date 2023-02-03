@@ -143,14 +143,11 @@ function Signup() {
           </div>
         </form>
       </div>
-      {/* {user && (
+      {user && (
         <div className="auth__message">
           <p>Votre compte a été crée</p>
         </div>
-      )} */}
-      <div className="auth__message">
-        <p>Votre compte a été crée</p>
-      </div>
+      )}
     </div>
   );
 }
