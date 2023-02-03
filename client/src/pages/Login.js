@@ -120,7 +120,7 @@ function Login() {
                 <button disabled={isSubmitting} type="submit">
                   Se connecter
                 </button>
-                <NavLink to="/">Je n'ai pas de compte</NavLink>
+                <NavLink to="/signup">Je n'ai pas de compte</NavLink>
               </div>
             </form>
           </div>
