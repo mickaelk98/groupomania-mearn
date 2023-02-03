@@ -1,4 +1,6 @@
 @use './variables';
 @use './reset';
 @use './base';
-@use './pages/auth'
+@use './pages/auth';
+@use './mixins';
+

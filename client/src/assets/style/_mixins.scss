@@ -1,0 +1,70 @@
+@mixin animation {
+  animation: appear 3s;
+}
+
+
+@keyframes appear {
+  0% {
+    top: -25px;
+  }
+  5% {
+    top: -20px;
+  }
+  10% {
+    top: -15px;
+  } 
+  15% {
+    top: -10px;
+  }
+  20% {
+    top: -5px;
+  }
+  25% {
+    top: 0px;
+  }
+  30% {
+    top: 5px;
+  }
+  35% {
+    top: 10px;
+  }
+  40% {
+    top: 15px;
+  }
+  45% {
+    top: 20px;
+  }
+  50% {
+    top: 25px;
+  }
+  55% {
+    top: 20px;
+  }
+  60% {
+    top: 15px;
+  }
+  65% {
+    top: 10px;
+  }
+  70% {
+    top: 0px;
+  }
+  75% {
+    top: -10px;
+  }
+  80% {
+    top: -20px;
+  }
+  85% {
+    top: -30px;
+  }
+  90% {
+    top: -40px;
+  }
+  95% {
+    top: -50px;
+  }
+  100% {
+    top: -60px;
+  }
+}

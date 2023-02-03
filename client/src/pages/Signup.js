@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 
 function Signup() {
   const [passwordType, setPasswordType] = useState("password");
+  const [user, setUser] = useState(false);
 
   const schema = yup.object({
     userName: yup
@@ -38,14 +39,13 @@ function Signup() {
       ),
   });
 
-  // console.log(errors);
-
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     setError,
     clearErrors,
+    reset,
   } = useForm({
     defaultValues: {
       userName: "",
@@ -60,12 +60,15 @@ function Signup() {
     try {
       clearErrors();
       await createUser(formValue);
+      setUser(true);
+      reset();
     } catch (e) {
       setError("userName", { type: "userName", message: e.userName });
       setError("email", { type: "email", message: e.email });
       setError("password", { type: "password", message: e.password });
     }
   }
+  console.log(user);
 
   return (
     <div className="auth">
@@ -139,6 +142,14 @@ function Signup() {
             <NavLink to="/login">J'ai déja un compte</NavLink>
           </div>
         </form>
+      </div>
+      {/* {user && (
+        <div className="auth__message">
+          <p>Votre compte a été crée</p>
+        </div>
+      )} */}
+      <div className="auth__message">
+        <p>Votre compte a été crée</p>
       </div>
     </div>
   );
