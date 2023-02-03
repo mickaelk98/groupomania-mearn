@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import logo from "../assets/images/logo.png";
-import { login as connectUser } from "../api";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
+import { AuthContext } from "../context";
 
 function Login() {
   const [passwordType, setPasswordType] = useState("password");
+  const { login: connectUser, user } = useContext(AuthContext);
 
   const schema = yup.object({
     email: yup
@@ -47,12 +48,11 @@ function Login() {
     resolver: yupResolver(schema),
   });
 
-  // envoi des données
+  // connexion de l'utilisateur
   async function Login(formValue) {
     try {
       clearErrors();
-      const user = await connectUser(formValue);
-      console.log(user);
+      await connectUser(formValue);
     } catch (e) {
       setError("email", { type: "email", message: e.email });
       setError("password", { type: "password", message: e.password });
@@ -60,67 +60,73 @@ function Login() {
   }
 
   return (
-    <div className="auth">
-      <div className="auth__container  container">
-        <div
-          className="auth__logo"
-          style={{ background: `url('${logo}') center/cover` }}
-        ></div>
-        <p className="auth__text">
-          Avec Groupomania, restez en contact avec vos collegues et amis
-        </p>
+    <>
+      {user ? (
+        <Navigate to="/homepage" />
+      ) : (
+        <div className="auth">
+          <div className="auth__container  container">
+            <div
+              className="auth__logo"
+              style={{ background: `url('${logo}') center/cover` }}
+            ></div>
+            <p className="auth__text">
+              Avec Groupomania, restez en contact avec vos collegues et amis
+            </p>
 
-        <form className="auth__form" onSubmit={handleSubmit(Login)}>
-          <input
-            {...register("email")}
-            className="auth__form__input"
-            type="text"
-            placeholder="Entrez votre email"
-          />
-          {errors?.email && (
-            <small className="auth__form__input-error">
-              {errors.email.message}
-            </small>
-          )}
+            <form className="auth__form" onSubmit={handleSubmit(Login)}>
+              <input
+                {...register("email")}
+                className="auth__form__input"
+                type="text"
+                placeholder="Entrez votre email"
+              />
+              {errors?.email && (
+                <small className="auth__form__input-error">
+                  {errors.email.message}
+                </small>
+              )}
 
-          <div className="auth__form__password-container">
-            <input
-              {...register("password")}
-              type={passwordType}
-              placeholder="Entrez votre mot de passe"
-            />
+              <div className="auth__form__password-container">
+                <input
+                  {...register("password")}
+                  type={passwordType}
+                  placeholder="Entrez votre mot de passe"
+                />
 
-            {passwordType === "text" ? (
-              <i
-                onClick={() => {
-                  setPasswordType("password");
-                }}
-                className="fa-regular fa-eye"
-              ></i>
-            ) : (
-              <i
-                onClick={() => {
-                  setPasswordType("text");
-                }}
-                className="fa-regular fa-eye-slash"
-              ></i>
-            )}
+                {passwordType === "text" ? (
+                  <i
+                    onClick={() => {
+                      setPasswordType("password");
+                    }}
+                    className="fa-regular fa-eye"
+                  ></i>
+                ) : (
+                  <i
+                    onClick={() => {
+                      setPasswordType("text");
+                    }}
+                    className="fa-regular fa-eye-slash"
+                  ></i>
+                )}
+              </div>
+              {errors?.password && (
+                <small className="auth__form__input-error">
+                  {errors.password.message}
+                </small>
+              )}
+
+              <div className="auth__form__buttons">
+                <button disabled={isSubmitting} type="submit">
+                  Se connecter
+                </button>
+                <NavLink to="/">Je n'ai pas de compte</NavLink>
+              </div>
+            </form>
           </div>
-          {errors?.password && (
-            <small className="auth__form__input-error">
-              {errors.password.message}
-            </small>
-          )}
-
-          <div className="auth__form__buttons">
-            <button disabled={isSubmitting} type="submit">
-              Se connecter
-            </button>
-            <NavLink to="/">Je n'ai pas de compte</NavLink>
-          </div>
-        </form>
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 }
 
