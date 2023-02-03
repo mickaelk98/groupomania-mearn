@@ -1,11 +1,9 @@
-// import Signup from "./page/Signup";
-import Login from "./page/Login";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      {/* <Signup /> */}
-      <Login />
+      <Outlet />
     </div>
   );
 }

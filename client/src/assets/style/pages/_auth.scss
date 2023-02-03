@@ -54,10 +54,9 @@
       }
       &__buttons {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 95%;
-        margin: 10px;
+        flex-direction: column;
+        gap: 10px;
+        // margin: 10px;
         button {
           text-transform: uppercase;
           padding: 10px;

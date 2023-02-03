@@ -3,12 +3,18 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import logo from "../assets/images/logo.png";
-import { login as connectUser } from "../api";
+import { signup as createUser } from "../api";
+import { NavLink } from "react-router-dom";
 
-function Login() {
+function Signup() {
   const [passwordType, setPasswordType] = useState("password");
 
   const schema = yup.object({
+    userName: yup
+      .string()
+      .required("Ce champ est obligatoire")
+      .min(2, "Votre nom doit faire au moin 2 caractères")
+      .max(20, "Votre nom doit faire maximun 20 caractères"),
     email: yup
       .string()
       .email("Votre saisie ne correspond pas a une adresse email")
@@ -32,6 +38,8 @@ function Login() {
       ),
   });
 
+  // console.log(errors);
+
   const {
     register,
     handleSubmit,
@@ -40,6 +48,7 @@ function Login() {
     clearErrors,
   } = useForm({
     defaultValues: {
+      userName: "",
       email: "",
       password: "",
     },
@@ -47,12 +56,12 @@ function Login() {
   });
 
   // envoi des données
-  async function Login(formValue) {
+  async function Signup(formValue) {
     try {
       clearErrors();
-      const user = await connectUser(formValue);
-      console.log(user);
+      await createUser(formValue);
     } catch (e) {
+      setError("userName", { type: "userName", message: e.userName });
       setError("email", { type: "email", message: e.email });
       setError("password", { type: "password", message: e.password });
     }
@@ -69,7 +78,19 @@ function Login() {
           Avec Groupomania, restez en contact avec vos collegues et amis
         </p>
 
-        <form className="auth__form" onSubmit={handleSubmit(Login)}>
+        <form className="auth__form" onSubmit={handleSubmit(Signup)}>
+          <input
+            {...register("userName")}
+            className="auth__form__input"
+            type="text"
+            placeholder="Entrez votre nom ou pseudo"
+          />
+          {errors?.userName && (
+            <small className="auth__form__input-error">
+              {errors.userName.message}
+            </small>
+          )}
+
           <input
             {...register("email")}
             className="auth__form__input"
@@ -113,9 +134,9 @@ function Login() {
 
           <div className="auth__form__buttons">
             <button disabled={isSubmitting} type="submit">
-              Se connecter
+              S'inscrire
             </button>
-            <button type="button">je n'ai pas de compte</button>
+            <NavLink to="/login">J'ai déja un compte</NavLink>
           </div>
         </form>
       </div>
@@ -123,4 +144,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signup;
