@@ -10,8 +10,6 @@ function Header() {
     await logout();
   }
 
-  console.log(user);
-
   return (
     <>
       {user ? (
