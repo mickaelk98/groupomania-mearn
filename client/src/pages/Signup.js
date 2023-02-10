@@ -68,7 +68,6 @@ function Signup() {
       setError("password", { type: "password", message: e.password });
     }
   }
-  console.log(user);
 
   return (
     <div className="auth">

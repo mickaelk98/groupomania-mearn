@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../context";
-import { login as connectUser } from "../api";
+import { login as connectUser, logout as disconnectUser } from "../api";
 
 function AuthProvider({ children }) {
   const initialuser = useLoaderData();
@@ -12,12 +12,13 @@ function AuthProvider({ children }) {
     setUser(newUser);
   }
 
-  console.log(user);
-
-  // async function logout() {}
+  async function logout() {
+    await disconnectUser();
+    setUser(null);
+  }
 
   return (
-    <AuthContext.Provider value={{ user, login }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

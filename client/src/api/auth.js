@@ -45,3 +45,19 @@ export async function login(credentials) {
     throw e;
   }
 }
+
+// fonction de deconnexion
+export async function logout() {
+  try {
+    const response = await fetch(`${BASE_URL}/logout`, {
+      method: "POST",
+      headers: {
+        "content-Type": "application/json",
+      },
+    });
+
+    console.log(await response.json());
+  } catch (e) {
+    throw e;
+  }
+}

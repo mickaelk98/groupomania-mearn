@@ -1,0 +1,21 @@
+.header {
+  position: relative;
+  box-shadow: var(--box-shadow-nav);
+  padding: 20px 0;
+  // background: red;
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .title {
+    font-size: 25px;
+    margin-left: 10px;
+    color: var(--primary-color);
+  }
+  .logoutLogo {
+    cursor: pointer;
+    margin-right: 10px;
+    color: var(--primary-color);
+  }
+}
