@@ -3,18 +3,21 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext, useEffect, useState } from "react";
+import { createPost as addPost } from "api";
 import style from "./NewPost.module.scss";
+import { useSetRecoilState } from "recoil";
+import { PostsState } from "state";
 
 function NewPost() {
   const { user } = useContext(AuthContext);
   const [file, setFile] = useState();
   const [imageUrl, setImageUrl] = useState();
+  const setPostsState = useSetRecoilState(PostsState);
   const { userName, image } = user;
 
   const schema = yup.object({
     text: yup
       .string()
-      .min(3, "Votre post doit faire un minimun de 3 caractères")
       .max(500, "Votre post doit faire un maximun de 500 caractères"),
   });
 
@@ -33,7 +36,6 @@ function NewPost() {
   // recupere l'image
   function handleChange(e) {
     setFile(e.target.files[0]);
-    console.log(e.target.files[0]);
   }
 
   // affiche la preview de l'image
@@ -48,12 +50,21 @@ function NewPost() {
   }, [file]);
 
   // fonction de creation de post
-  function createPost(formValue) {
-    if (file) {
-      formValue.image = file;
+  async function createPost(formValue) {
+    try {
+      if (file) {
+        formValue.image = file;
+      }
+      const newPost = await addPost(formValue);
+      console.log(newPost);
+      setPostsState((oldPosts) => {
+        // ajout de la clé edit au post pour le modifier facilement
+        return [...oldPosts, { ...newPost, edit: false }];
+      });
+      reset();
+    } catch (e) {
+      console.log(e);
     }
-    console.log(formValue);
-    reset();
   }
 
   return (
