@@ -23,6 +23,10 @@
     border: 0;
     margin: 10px auto;
   }
+  small {
+    color: var(--danger-1);
+    font-size: 14px;
+  }
   .image {
     text-align: center;
     width: auto;

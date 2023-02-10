@@ -1,4 +1,7 @@
 import { AuthContext } from "context";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext, useEffect, useState } from "react";
 import style from "./NewPost.module.scss";
 
@@ -7,6 +10,25 @@ function NewPost() {
   const [file, setFile] = useState();
   const [imageUrl, setImageUrl] = useState();
   const { userName, image } = user;
+
+  const schema = yup.object({
+    text: yup
+      .string()
+      .min(3, "Votre post doit faire un minimun de 3 caractères")
+      .max(500, "Votre post doit faire un maximun de 500 caractères"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      text: "",
+    },
+    resolver: yupResolver(schema),
+  });
 
   // recupere l'image
   function handleChange(e) {
@@ -25,14 +47,27 @@ function NewPost() {
     }
   }, [file]);
 
+  // fonction de creation de post
+  function createPost(formValue) {
+    if (file) {
+      formValue.image = file;
+    }
+    console.log(formValue);
+    reset();
+  }
+
   return (
     <div className={style.post}>
-      <form encType="multipart-form-data">
+      <form encType="multipart-form-data" onSubmit={handleSubmit(createPost)}>
         <div className={style.userinfo}>
           <img src={image} alt="profil" />
           <p>{userName}</p>
         </div>
-        <textarea placeholder="Quoi de neuf aujourd'hui ?"></textarea>
+        <textarea
+          {...register("text")}
+          placeholder="Quoi de neuf aujourd'hui ?"
+        ></textarea>
+        {errors.text && <small>{errors.text.message}</small>}
         <div className={style.image}>
           <label htmlFor="image">Choissir une image</label>
           <i className="fa-solid fa-upload"></i>
@@ -40,7 +75,14 @@ function NewPost() {
         </div>
         {imageUrl && (
           <div className={style.preview}>
-            <img onClick={() => setImageUrl(false)} src={imageUrl} alt="post" />
+            <img
+              onClick={() => {
+                setImageUrl(false);
+                setFile(null);
+              }}
+              src={imageUrl}
+              alt="post"
+            />
             <span>{file.name}</span>
           </div>
         )}
