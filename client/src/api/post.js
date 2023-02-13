@@ -30,10 +30,21 @@ export async function createPost(data) {
 export async function getAllPosts() {
   try {
     const response = await fetch(BASE_URL);
+    const posts = await response.json();
 
-    if (response.ok) {
-      const posts = await response.json();
-      return posts;
+    if (posts) {
+      // verifie si l'on recoit un tableau ou un objet
+      if (Array.isArray(posts)) {
+        // ajoute la cle edit a false sur chaque element
+        const allPosts = posts.map((p) => {
+          return { ...p, edit: false };
+        });
+        return allPosts;
+      } else {
+        // ajoute la cle edit a false a l'objet
+        const allPosts = { ...posts, edit: false };
+        return allPosts;
+      }
     }
   } catch (e) {
     console.log(e);

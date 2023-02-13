@@ -56,7 +56,6 @@ function NewPost() {
         formValue.image = file;
       }
       const newPost = await addPost(formValue);
-      console.log(newPost);
       setPostsState((oldPosts) => {
         // ajout de la clé edit au post pour le modifier facilement
         return [...oldPosts, { ...newPost, edit: false }];
