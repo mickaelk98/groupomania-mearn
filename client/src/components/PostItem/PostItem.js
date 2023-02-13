@@ -1,7 +1,9 @@
+import { useRef, useState } from "react";
 import CommentItem from "./components/CommentItem/CommentItem";
 import style from "./PostItem.module.scss";
 
 function PostItem({ post }) {
+  const [showComments, setShowComments] = useState(false);
   const {
     posterUsername,
     posterImage,
@@ -12,7 +14,6 @@ function PostItem({ post }) {
     usersLiked,
   } = post;
 
-  console.log(post);
   return (
     <div className={style.postitem}>
       <i className={`fa-solid fa-pen-to-square ${style.edititem}`}></i>
@@ -37,7 +38,10 @@ function PostItem({ post }) {
         </div>
         <div className={style.comments}>
           <span>
-            <i className="fa-solid fa-comment"></i>
+            <i
+              onClick={() => setShowComments(!showComments)}
+              className="fa-solid fa-comment"
+            ></i>
           </span>
           {comments.length > 0 ? (
             <p>{comments.length} commentaires</p>
@@ -46,11 +50,13 @@ function PostItem({ post }) {
           )}
         </div>
       </div>
-      <ul className={style.allComment}>
-        {comments.map((c) => (
-          <CommentItem key={c._id} comment={c} />
-        ))}
-      </ul>
+      {showComments && (
+        <ul className={style.allComment}>
+          {comments.map((c) => (
+            <CommentItem key={c._id} comment={c} />
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

@@ -1,5 +1,9 @@
 .comment {
-  margin: 20px 0;
+  margin: 10px 0;
+  padding: 10px 0;
+  border-radius: 10px;
+  background: var(--secondary-color);
+  border: 2px solid var(--secondary-color);
   .commenterinfo {
     display: flex;
     align-items: center;

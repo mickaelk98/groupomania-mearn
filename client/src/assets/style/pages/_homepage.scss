@@ -1,6 +1,6 @@
 .home {
-  background: var(--backgroud-color);
+  background: var(--background-color);
   &__main {
-    height: 100vh;
+    min-height: 100vh;
   }
 }
