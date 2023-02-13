@@ -1,4 +1,5 @@
 import NewPost from "components/NewPost/NewPost";
+import PostList from "components/PostList/PostList";
 import Header from "../components/Header/Header";
 
 function Homepage() {
@@ -7,6 +8,7 @@ function Homepage() {
       <Header />
       <main className="home__main">
         <NewPost />
+        <PostList />
       </main>
     </div>
   );

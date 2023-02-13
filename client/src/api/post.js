@@ -1,4 +1,5 @@
 const BASE_URL = "/api/post";
+
 // fonction pour ajouter un post
 export async function createPost(data) {
   try {
@@ -19,6 +20,20 @@ export async function createPost(data) {
       return post;
     } else {
       throw post;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+// fonction pour recuperer tout les posts
+export async function getAllPosts() {
+  try {
+    const response = await fetch(BASE_URL);
+
+    if (response.ok) {
+      const posts = await response.json();
+      return posts;
     }
   } catch (e) {
     console.log(e);
