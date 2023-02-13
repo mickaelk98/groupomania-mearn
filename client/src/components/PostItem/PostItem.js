@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import CommentItem from "./components/CommentItem/CommentItem";
 import style from "./PostItem.module.scss";
 
@@ -17,6 +17,7 @@ function PostItem({ post }) {
   return (
     <div className={style.postitem}>
       <i className={`fa-solid fa-pen-to-square ${style.edititem}`}></i>
+      <i className={`fa-sharp fa-solid fa-xmark ${style.deleteitem}`}></i>
       <div className={style.userinfo}>
         <img src={posterImage} alt="profil" />
         <p>{posterUsername}</p>
