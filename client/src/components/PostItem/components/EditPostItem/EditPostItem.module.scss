@@ -1,0 +1,36 @@
+.editpostform {
+  border: 1px solid var(--secondary-color);
+  padding: 10px;
+  textarea {
+    resize: none;
+    border: 0;
+    outline: none;
+    width: 95%;
+  }
+  .postimage {
+    height: 180px;
+    width: 100%;
+  }
+  .image {
+    text-align: center;
+    width: auto;
+    color: var(--secondary-color);
+    font-weight: bold;
+    height: 30px;
+    label, i {
+      cursor: pointer;
+    }
+    i {
+      margin-left: 10px;
+    }
+    input {
+      visibility: hidden;
+    }
+  }
+  button {
+    border: 0;
+    outline: 0;
+    padding: 6px;
+    background: var(--success-1);
+  }
+}

@@ -22,7 +22,7 @@ export async function createPost(data) {
       throw post;
     }
   } catch (e) {
-    console.log(e);
+    throw e;
   }
 }
 
@@ -47,6 +47,31 @@ export async function getAllPosts() {
       }
     }
   } catch (e) {
-    console.log(e);
+    throw e;
+  }
+}
+
+// fonction pour modifier un post
+export async function editPost(data, postId) {
+  try {
+    const fd = new FormData();
+
+    fd.append("text", data.text);
+    fd.append("image", data.image);
+
+    const response = await fetch(`${BASE_URL}/${postId}`, {
+      method: "PUT",
+      body: fd,
+    });
+
+    const post = await response.json();
+
+    if (response.ok) {
+      return post;
+    } else {
+      throw post;
+    }
+  } catch (e) {
+    throw e;
   }
 }

@@ -21,10 +21,21 @@ function PostList() {
     getAllPosts();
   }, [setPosts]);
 
+  // fonction pour afficher le template de modifivation d'un post
+  function toogleEdit(postId) {
+    const newPost = posts.map((p) =>
+      p._id === postId ? { ...p, edit: !p.edit } : p
+    );
+    setPosts(newPost);
+  }
+
   return (
     <div className={style.postlist}>
       <ul>
-        {posts && posts.map((post) => <PostItem key={post._id} post={post} />)}
+        {posts &&
+          posts.map((post) => (
+            <PostItem key={post._id} post={post} toogleEditPost={toogleEdit} />
+          ))}
       </ul>
     </div>
   );

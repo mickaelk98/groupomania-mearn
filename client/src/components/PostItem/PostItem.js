@@ -1,8 +1,9 @@
 import { useState } from "react";
 import CommentItem from "./components/CommentItem/CommentItem";
+import EditPostItem from "./components/EditPostItem/EditPostItem";
 import style from "./PostItem.module.scss";
 
-function PostItem({ post }) {
+function PostItem({ post, toogleEditPost }) {
   const [showComments, setShowComments] = useState(false);
   const {
     posterUsername,
@@ -12,20 +13,32 @@ function PostItem({ post }) {
     createdAt,
     comments,
     usersLiked,
+    edit,
+    _id,
   } = post;
 
   return (
     <div className={style.postitem}>
-      <i className={`fa-solid fa-pen-to-square ${style.edititem}`}></i>
+      <i
+        onClick={() => toogleEditPost(_id)}
+        className={`fa-solid fa-pen-to-square ${style.edititem}`}
+      ></i>
       <i className={`fa-sharp fa-solid fa-xmark ${style.deleteitem}`}></i>
       <div className={style.userinfo}>
         <img src={posterImage} alt="profil" />
         <p>{posterUsername}</p>
       </div>
       <p className={style.date}>{createdAt}</p>
-      {text && <p className={style.posttext}>{text}</p>}
-      {image && <img className={style.postimage} src={image} alt="post" />}
-
+      {edit ? (
+        <>
+          <EditPostItem post={post} />
+        </>
+      ) : (
+        <>
+          {text && <p className={style.posttext}>{text}</p>}
+          {image && <img className={style.postimage} src={image} alt="post" />}
+        </>
+      )}
       <div className={style.likecomment}>
         <div className={style.likes}>
           <span>
