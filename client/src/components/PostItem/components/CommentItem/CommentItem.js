@@ -1,3 +1,4 @@
+import { dateParser } from "helpers";
 import style from "./CommentItem.module.scss";
 
 function CommentItem({ comment }) {
@@ -7,7 +8,7 @@ function CommentItem({ comment }) {
         <img src={comment.commenterImage} alt="profil" />
         <p>{comment.commenterUsername}</p>
       </div>
-      <p className={style.date}>{comment.timestamp}</p>
+      <p className={style.date}>{dateParser(comment.timestamp)}</p>
       <p className={style.text}>{comment.text}</p>
     </li>
   );

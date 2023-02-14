@@ -2,6 +2,7 @@ import { AuthContext } from "context";
 import { useContext, useState } from "react";
 import CommentItem from "./components/CommentItem/CommentItem";
 import EditPostItem from "./components/EditPostItem/EditPostItem";
+import { dateParser } from "helpers";
 import style from "./PostItem.module.scss";
 
 function PostItem({ post, toogleEditPost }) {
@@ -36,7 +37,7 @@ function PostItem({ post, toogleEditPost }) {
         <img src={posterImage} alt="profil" />
         <p>{posterUsername}</p>
       </div>
-      <p className={style.date}>{createdAt}</p>
+      <p className={style.date}>{dateParser(createdAt)}</p>
       {edit ? (
         <>
           <EditPostItem post={post} />
