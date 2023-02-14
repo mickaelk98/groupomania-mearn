@@ -29,9 +29,7 @@ exports.createPost = async (req, res) => {
           posterUsername: userName,
           posterImage: image,
           text,
-          image: `${req.protocol}://${req.get("host")}/images/${
-            req.file.filename
-          }`,
+          image: `${req.protocol}://${process.env.HOSTNAME}/images/${req.file.filename}`,
         }
       : {
           posterId: _id,
@@ -102,9 +100,7 @@ exports.updatePost = async (req, res) => {
         const filename = post.image ? post.image.split("/images/")[1] : "";
 
         // ajout de la nouvelle image
-        postObject.image = `${req.protocol}://${req.get("host")}/images/${
-          req.file.filename
-        }`;
+        postObject.image = `${req.protocol}://${process.env.HOSTNAME}/images/${req.file.filename}`;
 
         post.image
           ? fs.unlink(`images/${filename}`, () => {

@@ -111,9 +111,7 @@ exports.updateCurrentUser = async (req, res) => {
           const filename = user.image.split("/images/")[1];
 
           // ajout de la nouvelle image
-          userObject.image = `${req.protocol}://${req.get("host")}/images/${
-            req.file.filename
-          }`;
+          userObject.image = `${req.protocol}://${process.env.HOSTNAME}/images/${req.file.filename}`;
 
           // suppression de l'ancienne image
           fs.unlink(`images/${filename}`, () => {

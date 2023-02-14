@@ -19,7 +19,7 @@ exports.signup = async (req, res) => {
       ...req.body,
       password: hashedPassword,
       //* ajout d'une image et d'un status par default
-      image: `${req.protocol}://${req.get("host")}/images/default.jpg`,
+      image: `${req.protocol}://${process.env.HOSTNAME}/images/default.jpg`,
       isAdmin: false,
       description: "",
     });
