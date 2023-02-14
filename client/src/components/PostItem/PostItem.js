@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { AuthContext } from "context";
+import { useContext, useState } from "react";
 import CommentItem from "./components/CommentItem/CommentItem";
 import EditPostItem from "./components/EditPostItem/EditPostItem";
 import style from "./PostItem.module.scss";
 
 function PostItem({ post, toogleEditPost }) {
   const [showComments, setShowComments] = useState(false);
+  const { user } = useContext(AuthContext);
+
   const {
     posterUsername,
     posterImage,
@@ -15,15 +18,20 @@ function PostItem({ post, toogleEditPost }) {
     usersLiked,
     edit,
     _id,
+    posterId,
   } = post;
 
   return (
     <div className={style.postitem}>
-      <i
-        onClick={() => toogleEditPost(_id)}
-        className={`fa-solid fa-pen-to-square ${style.edititem}`}
-      ></i>
-      <i className={`fa-sharp fa-solid fa-xmark ${style.deleteitem}`}></i>
+      {user._id === posterId && (
+        <>
+          <i
+            onClick={() => toogleEditPost(_id)}
+            className={`fa-solid fa-pen-to-square ${style.edititem}`}
+          ></i>
+          <i className={`fa-sharp fa-solid fa-xmark ${style.deleteitem}`}></i>
+        </>
+      )}
       <div className={style.userinfo}>
         <img src={posterImage} alt="profil" />
         <p>{posterUsername}</p>
