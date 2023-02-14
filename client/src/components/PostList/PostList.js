@@ -1,12 +1,13 @@
 import { useEffect } from "react";
-import { useRecoilState } from "recoil";
-import { PostsState } from "state";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { PostsState, selectSortPosts } from "state";
 import { getAllPosts as fetchPosts } from "api";
 import PostItem from "../PostItem/PostItem";
 import style from "./PostList.module.scss";
 
 function PostList() {
   const [posts, setPosts] = useRecoilState(PostsState);
+  const sortedPosts = useRecoilValue(selectSortPosts);
 
   // fonction pour recuperer tout les posts
   useEffect(() => {
@@ -33,7 +34,7 @@ function PostList() {
     <div className={style.postlist}>
       <ul>
         {posts &&
-          posts.map((post) => (
+          sortedPosts.map((post) => (
             <PostItem key={post._id} post={post} toogleEditPost={toogleEdit} />
           ))}
       </ul>
