@@ -115,3 +115,26 @@ export async function likeAndDislikePost(postId) {
     throw e;
   }
 }
+
+// foction pour commenter un post
+export async function commentOnePost(postId, text) {
+  try {
+    const response = await fetch(`${BASE_URL}/comment/${postId}`, {
+      method: "POST",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify({ text }),
+    });
+
+    const post = await response.json();
+
+    if (response.ok) {
+      return post;
+    } else {
+      throw post;
+    }
+  } catch (e) {
+    throw e;
+  }
+}

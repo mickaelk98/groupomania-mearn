@@ -7,6 +7,7 @@ import { deleteOnePost, likeAndDislikePost } from "api";
 import style from "./PostItem.module.scss";
 import { useSetRecoilState } from "recoil";
 import { PostsState } from "state";
+import AddComment from "./components/AddComment/AddComment";
 
 function PostItem({ post, toogleEditPost }) {
   const [showComments, setShowComments] = useState(false);
@@ -116,11 +117,14 @@ function PostItem({ post, toogleEditPost }) {
         </div>
       </div>
       {showComments && (
-        <ul className={style.allComment}>
-          {comments.map((c) => (
-            <CommentItem key={c._id} comment={c} />
-          ))}
-        </ul>
+        <>
+          <AddComment postId={_id} />
+          <ul className={style.allComment}>
+            {comments.map((c) => (
+              <CommentItem key={c._id} comment={c} />
+            ))}
+          </ul>
+        </>
       )}
     </div>
   );

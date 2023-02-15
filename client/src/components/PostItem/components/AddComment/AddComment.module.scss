@@ -1,0 +1,18 @@
+.addcomment {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  img {
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+  textarea {
+    flex: 1 0 0;
+    border-radius: 10px;
+    border: 2px solid var(--tertiary-color);
+    outline: 0;
+    resize: none;
+  }
+}
