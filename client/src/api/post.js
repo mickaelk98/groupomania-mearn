@@ -1,3 +1,5 @@
+import { async } from "q";
+
 const BASE_URL = "/api/post";
 
 // fonction pour ajouter un post
@@ -81,6 +83,25 @@ export async function deleteOnePost(postId) {
   try {
     const response = await fetch(`${BASE_URL}/${postId}`, {
       method: "DELETE",
+    });
+
+    const post = await response.json();
+
+    if (response.ok) {
+      return post;
+    } else {
+      throw post;
+    }
+  } catch (e) {
+    throw e;
+  }
+}
+
+// fonction pour liké et disliké un post
+export async function likeAndDislikePost(postId) {
+  try {
+    const response = await fetch(`${BASE_URL}/like/${postId}`, {
+      method: "POST",
     });
 
     const post = await response.json();

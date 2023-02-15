@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import CommentItem from "./components/CommentItem/CommentItem";
 import EditPostItem from "./components/EditPostItem/EditPostItem";
 import { dateParser } from "helpers";
-import { deleteOnePost } from "api";
+import { deleteOnePost, likeAndDislikePost } from "api";
 import style from "./PostItem.module.scss";
 import { useSetRecoilState } from "recoil";
 import { PostsState } from "state";
@@ -26,7 +26,7 @@ function PostItem({ post, toogleEditPost }) {
     posterId,
   } = post;
 
-  // fonction de creation de post
+  // fonction de suppression de post
   async function deletePost() {
     try {
       const post = await deleteOnePost(_id);
@@ -34,6 +34,20 @@ function PostItem({ post, toogleEditPost }) {
         return oldPosts.filter((oldPost) => oldPost._id !== _id);
       });
       console.log(post);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  // fonction pour liké et disliké un post
+  async function likeAndDislike() {
+    try {
+      const post = await likeAndDislikePost(_id);
+      setPostState((oldPosts) => {
+        return oldPosts.map((oldPost) =>
+          oldPost._id === post._id ? post : oldPost
+        );
+      });
     } catch (e) {
       console.log(e);
     }
@@ -71,7 +85,15 @@ function PostItem({ post, toogleEditPost }) {
       <div className={style.likecomment}>
         <div className={style.likes}>
           <span>
-            <i className="fa-regular fa-heart"></i>
+            <i
+              onClick={likeAndDislike}
+              className="fa-solid fa-heart"
+              style={
+                usersLiked.includes(user._id)
+                  ? { color: "#fd2d01" }
+                  : { color: "" }
+              }
+            ></i>
           </span>
           {usersLiked.length > 0 ? (
             <p>{usersLiked.length} likes</p>
