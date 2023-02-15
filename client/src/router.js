@@ -6,6 +6,7 @@ import Signup from "./pages/Signup";
 import { rootLoader } from "./loaders";
 import IsConnected from "./components/IsConnected";
 import IsNotConnected from "./components/IsNotConnected";
+import Profil from "pages/Profil";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,14 @@ export const router = createBrowserRouter([
         element: (
           <IsConnected>
             <Homepage />
+          </IsConnected>
+        ),
+      },
+      {
+        path: "/profil/:id",
+        element: (
+          <IsConnected>
+            <Profil />
           </IsConnected>
         ),
       },
