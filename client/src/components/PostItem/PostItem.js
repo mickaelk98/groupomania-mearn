@@ -96,7 +96,7 @@ function PostItem({ post, toogleEditPost }) {
               }
             ></i>
           </span>
-          {usersLiked.length > 0 ? (
+          {usersLiked.length > 1 ? (
             <p>{usersLiked.length} likes</p>
           ) : (
             <p>{usersLiked.length} like</p>
@@ -109,7 +109,7 @@ function PostItem({ post, toogleEditPost }) {
               className="fa-solid fa-comment"
             ></i>
           </span>
-          {comments.length > 0 ? (
+          {comments.length > 1 ? (
             <p>{comments.length} commentaires</p>
           ) : (
             <p>{comments.length} commentaire</p>

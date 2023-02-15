@@ -1,5 +1,3 @@
-import { async } from "q";
-
 const BASE_URL = "/api/post";
 
 // fonction pour ajouter un post
