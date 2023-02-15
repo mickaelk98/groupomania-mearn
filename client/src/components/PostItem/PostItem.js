@@ -3,11 +3,15 @@ import { useContext, useState } from "react";
 import CommentItem from "./components/CommentItem/CommentItem";
 import EditPostItem from "./components/EditPostItem/EditPostItem";
 import { dateParser } from "helpers";
+import { deleteOnePost } from "api";
 import style from "./PostItem.module.scss";
+import { useSetRecoilState } from "recoil";
+import { PostsState } from "state";
 
 function PostItem({ post, toogleEditPost }) {
   const [showComments, setShowComments] = useState(false);
   const { user } = useContext(AuthContext);
+  const setPostState = useSetRecoilState(PostsState);
 
   const {
     posterUsername,
@@ -22,6 +26,19 @@ function PostItem({ post, toogleEditPost }) {
     posterId,
   } = post;
 
+  // fonction de creation de post
+  async function deletePost() {
+    try {
+      const post = await deleteOnePost(_id);
+      setPostState((oldPosts) => {
+        return oldPosts.filter((oldPost) => oldPost._id !== _id);
+      });
+      console.log(post);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   return (
     <div className={style.postitem}>
       {user._id === posterId && (
@@ -30,7 +47,10 @@ function PostItem({ post, toogleEditPost }) {
             onClick={() => toogleEditPost(_id)}
             className={`fa-solid fa-pen-to-square ${style.edititem}`}
           ></i>
-          <i className={`fa-sharp fa-solid fa-xmark ${style.deleteitem}`}></i>
+          <i
+            onClick={deletePost}
+            className={`fa-sharp fa-solid fa-xmark ${style.deleteitem}`}
+          ></i>
         </>
       )}
       <div className={style.userinfo}>

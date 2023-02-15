@@ -75,3 +75,22 @@ export async function editPost(data, postId) {
     throw e;
   }
 }
+
+// fonction pour supprimer un post
+export async function deleteOnePost(postId) {
+  try {
+    const response = await fetch(`${BASE_URL}/${postId}`, {
+      method: "DELETE",
+    });
+
+    const post = await response.json();
+
+    if (response.ok) {
+      return post;
+    } else {
+      throw post;
+    }
+  } catch (e) {
+    throw e;
+  }
+}
