@@ -12,10 +12,18 @@
     font-size: 25px;
     margin-left: 10px;
     color: var(--primary-color);
-  }
-  .logoutLogo {
     cursor: pointer;
-    margin-right: 10px;
-    color: var(--primary-color);
+  }
+  .user {
+    .profil, .logoutLogo {
+      cursor: pointer;
+      color: var(--primary-color);
+    }
+    .profil {
+      margin-right: 30px;
+    }
+    .logoutLogo {
+      margin-right: 10px;
+    }
   }
 }

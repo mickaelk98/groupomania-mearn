@@ -3,7 +3,6 @@ const BASE_URL = "/api/post";
 // fonction pour ajouter un post
 export async function createPost(data) {
   try {
-    console.log(data);
     const fd = new FormData();
 
     fd.append("text", data.text);

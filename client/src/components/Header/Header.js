@@ -16,12 +16,17 @@ function Header() {
         <header className={styles.header}>
           <div className={`${styles.container} container`}>
             <h1 className={styles.title}>Groupomania</h1>
-            <span className={styles.logoutLogo}>
-              <i
-                onClick={handleClick}
-                className="fa-solid fa-right-from-bracket"
-              ></i>
-            </span>
+            <div className={styles.user}>
+              <span className={styles.profil}>
+                <i className="fa-solid fa-user"></i>
+              </span>
+              <span className={styles.logoutLogo}>
+                <i
+                  onClick={handleClick}
+                  className="fa-solid fa-right-from-bracket"
+                ></i>
+              </span>
+            </div>
           </div>
         </header>
       ) : (
