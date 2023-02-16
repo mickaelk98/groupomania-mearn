@@ -13,6 +13,9 @@ a {
   }
 }
 
-.isActive {
-  color: red;
+.active {
+  i, p {
+    color: var(--primary-color);
+  }
+
 }

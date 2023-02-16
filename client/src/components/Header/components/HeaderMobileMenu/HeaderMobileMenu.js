@@ -29,7 +29,7 @@ function HaederMobileMenu({ hideMobileMenu, user, logout }) {
       <ul className={styles.user}>
         <li>
           <span className={styles.profil}>
-            <NavLink to={`/profil/${user._id}`}>
+            <NavLink end to={`/profil/${user._id}`}>
               <i className="fa-solid fa-user"></i>
               <p>Profil</p>
             </NavLink>
@@ -37,7 +37,7 @@ function HaederMobileMenu({ hideMobileMenu, user, logout }) {
         </li>
         <li>
           <span className={styles.settings}>
-            <NavLink>
+            <NavLink end to="/">
               <i className="fa-solid fa-gear"></i>
               <p>Paramètres</p>
             </NavLink>
