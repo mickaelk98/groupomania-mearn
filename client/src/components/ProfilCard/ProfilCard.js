@@ -10,9 +10,7 @@ function ProfilCard() {
   const params = useParams();
   const userId = params.id;
   const arrayOfUsers = useRecoilValue(selectSortUsers(userId));
-  const { ...userProfilInfo } = arrayOfUsers[0];
-
-  console.log(userProfilInfo, userId);
+  const userProfilInfo = arrayOfUsers[0];
 
   useEffect(() => {
     async function fetchAllUseres() {
@@ -20,7 +18,9 @@ function ProfilCard() {
         const users = await getAllUsers();
 
         setUsersState(users);
-      } catch (e) {}
+      } catch (e) {
+        console.log(e);
+      }
     }
 
     fetchAllUseres();
