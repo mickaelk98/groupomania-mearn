@@ -15,6 +15,9 @@
       margin-left: 10px;
       color: var(--primary-color);
       cursor: pointer;
+      @include media.xl {
+        margin: 0;
+      }
     }
     .navbar {
       cursor: pointer;

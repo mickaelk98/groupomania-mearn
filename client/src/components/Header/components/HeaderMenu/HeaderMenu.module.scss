@@ -7,6 +7,9 @@
   @include media.sm-lt {
     display: none;
   }
+  @include media.xl {
+    margin: 0;
+  }
   .user {
     display: flex;
     align-items: center;

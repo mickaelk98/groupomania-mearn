@@ -5,7 +5,7 @@ function Profil() {
   return (
     <div className="profil">
       <Header />
-      <main className="profil__main">
+      <main className="profil__main container">
         <ProfilCard />
       </main>
     </div>
