@@ -1,3 +1,5 @@
+@use '../../assets/style/media';
+
 .header {
   position: relative;
   box-shadow: var(--box-shadow-nav);
@@ -7,22 +9,25 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-  .title {
-    font-size: 25px;
-    margin-left: 10px;
-    color: var(--primary-color);
-    cursor: pointer;
-  }
-  .user {
-    .profil, .logoutLogo {
-      cursor: pointer;
+    margin: 0 auto;
+    .title {
+      font-size: 20px;
+      margin-left: 10px;
       color: var(--primary-color);
+      cursor: pointer;
     }
-    .profil {
-      margin-right: 30px;
-    }
-    .logoutLogo {
+    .navbar {
+      cursor: pointer;
+      @include media.md {
+        display: none;
+      }
+      @include media.lg {
+        display: none;
+      }
+      @include media.xl {
+        display: none;
+      }
+      color: var(--primary-color);
       margin-right: 10px;
     }
   }

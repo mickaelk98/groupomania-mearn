@@ -1,0 +1,40 @@
+@use '../../../../assets/style/media';
+
+.navlist {
+  margin-right: 10px;
+  max-width: 400px;
+  width: 40vh;
+  @include media.sm-lt {
+    display: none;
+  }
+  .user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-items: center;
+    .profil, .settings, .logout {
+      a {
+        display: flex;
+        align-items: center;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        color: var(--tertiary-color);
+        &:hover {
+          color: var(--primary-color);
+        }
+      }
+      display: flex;
+      align-items: center;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      color: var(--tertiary-color);
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+  }
+}

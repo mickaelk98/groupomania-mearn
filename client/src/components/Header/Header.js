@@ -1,14 +1,13 @@
 import { AuthContext } from "context";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Navigate, NavLink } from "react-router-dom";
+import HeaderMenu from "./components/HeaderMenu/HeaderMenu";
+import HaederMobileMenu from "./components/HeaderMobileMenu/HeaderMobileMenu";
 import styles from "./Header.module.scss";
 
 function Header() {
   const { logout, user } = useContext(AuthContext);
-
-  async function handleClick() {
-    await logout();
-  }
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   return (
     <>
@@ -18,19 +17,23 @@ function Header() {
             <NavLink to="/">
               <h1 className={styles.title}>Groupomania</h1>
             </NavLink>
-            <div className={styles.user}>
-              <span className={styles.profil}>
-                <NavLink to={`/profil/${user._id}`}>
-                  <i className="fa-solid fa-user"></i>
-                </NavLink>
-              </span>
-              <span className={styles.logoutLogo}>
-                <i
-                  onClick={handleClick}
-                  className="fa-solid fa-right-from-bracket"
-                ></i>
-              </span>
-            </div>
+            <span className={styles.navbar}>
+              <i
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowMobileMenu(true);
+                }}
+                className="fa-solid fa-bars"
+              ></i>
+            </span>
+            <HeaderMenu logout={logout} user={user} />
+            {showMobileMenu && (
+              <HaederMobileMenu
+                hideMobileMenu={() => setShowMobileMenu(false)}
+                user={user}
+                logout={logout}
+              />
+            )}
           </div>
         </header>
       ) : (

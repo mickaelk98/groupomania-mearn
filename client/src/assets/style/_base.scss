@@ -7,5 +7,12 @@ body {
 }
 
 a {
-  color: var(--primary-color);
+  color: var(--tertiary-color);
+  &:hover {
+    color: var(--primary-color);
+  }
+}
+
+.isActive {
+  color: red;
 }
