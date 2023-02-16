@@ -20,7 +20,8 @@ export const selectSortUsers = selectorFamily({
   get:
     (userId) =>
     ({ get }) => {
-      const users = get(usersState);
-      return users.filter((user) => user._id === userId);
+      const users = get(usersState)?.filter((user) => user._id === userId);
+      const user = users[0];
+      return user;
     },
 });

@@ -3,7 +3,7 @@ import App from "./App";
 import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import { rootLoader } from "./loaders";
+import { rootLoader, fetchUsers } from "./loaders";
 import IsConnected from "./components/IsConnected";
 import IsNotConnected from "./components/IsNotConnected";
 import Profil from "pages/Profil";
@@ -24,6 +24,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/profil/:id",
+        loader: fetchUsers,
         element: (
           <IsConnected>
             <Profil />
