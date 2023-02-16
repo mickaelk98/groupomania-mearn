@@ -15,7 +15,9 @@ function Header() {
       {user ? (
         <header className={styles.header}>
           <div className={`${styles.container} container`}>
-            <h1 className={styles.title}>Groupomania</h1>
+            <NavLink to="/">
+              <h1 className={styles.title}>Groupomania</h1>
+            </NavLink>
             <div className={styles.user}>
               <span className={styles.profil}>
                 <NavLink to={`/profil/${user._id}`}>
