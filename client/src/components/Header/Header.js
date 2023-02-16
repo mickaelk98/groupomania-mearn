@@ -1,6 +1,6 @@
 import { AuthContext } from "context";
 import { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
 import styles from "./Header.module.scss";
 
 function Header() {
@@ -18,7 +18,9 @@ function Header() {
             <h1 className={styles.title}>Groupomania</h1>
             <div className={styles.user}>
               <span className={styles.profil}>
-                <i className="fa-solid fa-user"></i>
+                <NavLink to={`/profil/${user._id}`}>
+                  <i className="fa-solid fa-user"></i>
+                </NavLink>
               </span>
               <span className={styles.logoutLogo}>
                 <i

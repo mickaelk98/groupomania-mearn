@@ -7,6 +7,7 @@ import { createPost as addPost } from "api";
 import style from "./NewPost.module.scss";
 import { useSetRecoilState } from "recoil";
 import { PostsState } from "state";
+import { NavLink } from "react-router-dom";
 
 function NewPost() {
   const { user } = useContext(AuthContext);
@@ -70,7 +71,9 @@ function NewPost() {
     <div className={style.post}>
       <form encType="multipart-form-data" onSubmit={handleSubmit(createPost)}>
         <div className={style.userinfo}>
-          <img src={image} alt="profil" />
+          <NavLink to={`/profil/${user._id}`}>
+            <img src={image} alt="profil" />
+          </NavLink>
           <p>{userName}</p>
         </div>
         <textarea

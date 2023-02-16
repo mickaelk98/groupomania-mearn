@@ -1,6 +1,7 @@
 import { commentOnePost } from "api";
 import { AuthContext } from "context";
 import { useContext, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { PostsState } from "state";
 import style from "./AddComment.module.scss";
@@ -35,7 +36,9 @@ function AddComment({ postId }) {
 
   return (
     <form className={style.addcomment}>
-      <img src={user.image} alt="profil" />
+      <NavLink to={`/profil/${user._id}`}>
+        <img src={user.image} alt="profil" />
+      </NavLink>
       <textarea
         onKeyDown={handleKeyDown}
         onChange={handleChange}

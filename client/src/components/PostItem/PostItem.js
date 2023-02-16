@@ -8,6 +8,7 @@ import style from "./PostItem.module.scss";
 import { useSetRecoilState } from "recoil";
 import { PostsState } from "state";
 import AddComment from "./components/AddComment/AddComment";
+import { NavLink } from "react-router-dom";
 
 function PostItem({ post, toogleEditPost }) {
   const [showComments, setShowComments] = useState(false);
@@ -69,7 +70,9 @@ function PostItem({ post, toogleEditPost }) {
         </>
       )}
       <div className={style.userinfo}>
-        <img src={posterImage} alt="profil" />
+        <NavLink to={`/profil/${posterId}`}>
+          <img src={posterImage} alt="profil" />
+        </NavLink>
         <p>{posterUsername}</p>
       </div>
       <p className={style.date}>{dateParser(createdAt)}</p>
