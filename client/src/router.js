@@ -7,6 +7,8 @@ import { rootLoader, fetchUsers } from "./loaders";
 import IsConnected from "./components/IsConnected";
 import IsNotConnected from "./components/IsNotConnected";
 import Profil from "pages/Profil";
+import { element } from "prop-types";
+import EditProfil from "pages/EditProfil";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +30,14 @@ export const router = createBrowserRouter([
         element: (
           <IsConnected>
             <Profil />
+          </IsConnected>
+        ),
+      },
+      {
+        path: "/profil/edit/:id",
+        element: (
+          <IsConnected>
+            <EditProfil />
           </IsConnected>
         ),
       },
