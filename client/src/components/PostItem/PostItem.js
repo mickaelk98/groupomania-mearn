@@ -58,16 +58,16 @@ function PostItem({ post, toogleEditPost }) {
   return (
     <div className={style.postitem}>
       {user._id === posterId && (
-        <>
-          <i
-            onClick={() => toogleEditPost(_id)}
-            className={`fa-solid fa-pen-to-square ${style.edititem}`}
-          ></i>
-          <i
-            onClick={deletePost}
-            className={`fa-sharp fa-solid fa-xmark ${style.deleteitem}`}
-          ></i>
-        </>
+        <i
+          onClick={() => toogleEditPost(_id)}
+          className={`fa-solid fa-pen-to-square ${style.edititem}`}
+        ></i>
+      )}
+      {(user._id === posterId || user.isAdmin) && (
+        <i
+          onClick={deletePost}
+          className={`fa-sharp fa-solid fa-xmark ${style.deleteitem}`}
+        ></i>
       )}
       <div className={style.userinfo}>
         <NavLink to={`/profil/${posterId}`}>

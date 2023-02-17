@@ -141,10 +141,13 @@ exports.deletePost = async (req, res) => {
     // recherche le post que l'on veut modifié dans la base de donnée
     const post = await Post.findOne({ _id: id });
 
+    // recherche l'utilisateur qui fait la requete dans la base de données
+    const user = await User.findById({ _id: req.auth });
+
     // si le post a été trouvé
     if (post) {
       // verifie si celui qui veut supprimer le post a les droits
-      if (req.auth !== post.posterId) {
+      if (req.auth !== post.posterId && user.isAdmin === false) {
         return res.status(401).json({ message: "Requete non autorisé" });
       }
 
