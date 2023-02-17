@@ -1,7 +1,29 @@
 .profil {
   background: var(--background-color);
+  min-height: 100vh;
   &__main {
-    min-height: 100vh;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    &-btn {
+      width: 50%;
+      max-width: 320px;
+      padding: 8px;
+      border: none;
+      background: var(--primary-color);
+      border: 1px solid var(--primary-color);
+      color: #fff;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.6s;
+      &:hover {
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+        background: none;
+      }
+    }
   }
 }
