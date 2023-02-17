@@ -95,7 +95,6 @@ function EditProfil() {
   async function editProfil(formValue) {
     try {
       clearErrors();
-      console.log(formValue);
       formValue.image = file;
       await editUser(user._id, formValue);
       reset();

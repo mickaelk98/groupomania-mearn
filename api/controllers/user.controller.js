@@ -106,7 +106,7 @@ exports.updateCurrentUser = async (req, res) => {
           userObject.password = user.password;
         } else {
           const hashedPassword = await bcrypt.hash(password, 10);
-          userObject = { password: hashedPassword, ...req.body };
+          userObject.password = hashedPassword;
         }
 
         // si l'on modifie l'image
