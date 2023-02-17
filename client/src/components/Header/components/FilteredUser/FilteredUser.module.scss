@@ -1,0 +1,26 @@
+@use '../../../../assets/style/media';
+
+.user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 200px;
+  @include media.md {
+    width: 300px;
+  }
+  @include media.lg {
+    width: 400px;
+  }
+  @include media.xl {
+    width: 400px;
+  }
+  padding: 5px;
+  height: auto;
+  border-radius: 10px;
+  z-index: 3;
+  .image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+}

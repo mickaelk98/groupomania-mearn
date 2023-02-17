@@ -14,7 +14,7 @@ export const selectSortPosts = selector({
   },
 });
 
-// useres selector
+// users selector
 export const selectSortUsers = selectorFamily({
   key: "selectSortUsers",
   get:
@@ -23,5 +23,17 @@ export const selectSortUsers = selectorFamily({
       const users = get(usersState)?.filter((user) => user._id === userId);
       const user = users[0];
       return user;
+    },
+});
+
+export const selectFilteredUsers = selectorFamily({
+  key: "selectFilteredUsers",
+  get:
+    (filter) =>
+    ({ get }) => {
+      const users = get(usersState)?.filter((user) =>
+        user.userName.toLocaleLowerCase().startsWith(filter)
+      );
+      return users;
     },
 });

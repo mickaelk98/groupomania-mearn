@@ -75,3 +75,16 @@
     }
   }
 }
+
+.userlist {
+  position: absolute;
+  background: #fff;
+  border-radius: 10px;
+  height: auto;
+  max-height: 200px;
+  overflow-y: scroll;
+  top: 90px;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 5;
+}
