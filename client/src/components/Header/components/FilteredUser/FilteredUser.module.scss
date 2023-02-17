@@ -9,10 +9,10 @@
     width: 300px;
   }
   @include media.lg {
-    width: 400px;
+    width: 300px;
   }
   @include media.xl {
-    width: 400px;
+    width: 300px;
   }
   padding: 5px;
   height: auto;
@@ -22,5 +22,6 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    cursor: pointer;
   }
 }
