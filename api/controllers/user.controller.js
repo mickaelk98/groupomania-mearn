@@ -7,7 +7,6 @@ exports.getAllUsers = async (req, res) => {
   try {
     // recherche tout les utilisateur
     const users = await User.find();
-    console.log(users);
 
     if (users.length === 0) {
       res.status(200).json({ message: "Aucun utilisateur pour le moment" });

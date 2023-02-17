@@ -5,8 +5,19 @@ const jwt = require("jsonwebtoken");
 // controller d'inscription
 exports.signup = async (req, res) => {
   try {
-    const { password } = req.body;
+    const { password, email } = req.body;
     let hashedPassword = "";
+    let userStatus;
+
+    // verifie si l'identifiant et le mot de passe sont ceux de l'administrateur
+    if (
+      email === process.env.ADMIN_USERNAM &&
+      password === process.env.ADMIN_PASSWORD
+    ) {
+      userStatus = true;
+    } else {
+      userStatus = false;
+    }
 
     if (password) {
       hashedPassword = await bcrypt.hash(password, 10);
@@ -20,7 +31,7 @@ exports.signup = async (req, res) => {
       password: hashedPassword,
       //* ajout d'une image et d'un status par default
       image: `${req.protocol}://${process.env.HOSTNAME}/images/default.jpg`,
-      isAdmin: false,
+      isAdmin: userStatus,
       description: "",
     });
 
