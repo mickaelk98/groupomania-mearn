@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { Navigate, NavLink } from "react-router-dom";
 import HeaderMenu from "./components/HeaderMenu/HeaderMenu";
 import HaederMobileMenu from "./components/HeaderMobileMenu/HeaderMobileMenu";
+import SearchBox from "./components/SearchBox/SearchBox";
 import styles from "./Header.module.scss";
 
 function Header() {
@@ -17,6 +18,7 @@ function Header() {
             <NavLink to="/">
               <h1 className={styles.title}>Groupomania</h1>
             </NavLink>
+            <SearchBox />
             <span className={styles.navbar}>
               <i
                 onClick={(e) => {
