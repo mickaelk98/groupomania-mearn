@@ -37,7 +37,7 @@ function HaederMobileMenu({ hideMobileMenu, user, logout }) {
         </li>
         <li>
           <span className={styles.settings}>
-            <NavLink end to="/">
+            <NavLink end to={`/profil/edit/${user._id}`}>
               <i className="fa-solid fa-gear"></i>
               <p>Paramètres</p>
             </NavLink>

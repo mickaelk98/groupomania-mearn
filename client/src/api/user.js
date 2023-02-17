@@ -17,3 +17,30 @@ export async function getAllUsers() {
     throw e;
   }
 }
+
+// fonction pour mettre a jour un utilisateur
+export async function editUser(userId, data) {
+  try {
+    const fd = new FormData();
+
+    fd.append("userName", data.userName);
+    fd.append("email", data.email);
+    fd.append("password", data.password);
+    fd.append("image", data.image);
+
+    const response = await fetch(`${BASE_URL}/${userId}`, {
+      method: "PUT",
+      body: fd,
+    });
+
+    const user = await response.json();
+
+    if (response.ok) {
+      return user;
+    } else {
+      throw user;
+    }
+  } catch (e) {
+    throw e;
+  }
+}

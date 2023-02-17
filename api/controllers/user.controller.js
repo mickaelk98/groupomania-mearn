@@ -76,7 +76,7 @@ exports.deleteCurrentUser = async (req, res) => {
 // controller pour modifier un utilisateur
 exports.updateCurrentUser = async (req, res) => {
   try {
-    const { password, email } = req.body;
+    const { password, email, userName } = req.body;
     const { id: userId } = req.params;
     let userObject = {};
 
@@ -91,18 +91,22 @@ exports.updateCurrentUser = async (req, res) => {
         res.status(401).json({ message: "Requete non autorisé" });
       } else {
         //recherche si l'email est déja utiisé
-        const emailAlreadyUsed = await User.findOne({ email: email });
+        const userAlreadyExist = await User.findOne({ email: email });
 
-        if (emailAlreadyUsed) {
-          return res.status(404).json({ message: "L'émail est déja utilisé" });
+        if (!userAlreadyExist) {
+          userObject.email = email;
+        } else if (userAlreadyExist.email === user.email) {
+          userObject.email = user.email;
+        } else {
+          return res.status(404).json({ email: "L'émail est déja utilisé" });
         }
 
         // si l'on modifie le mot de passe
-        if (password) {
+        if (password === "") {
+          userObject.password = user.password;
+        } else {
           const hashedPassword = await bcrypt.hash(password, 10);
           userObject = { password: hashedPassword, ...req.body };
-        } else {
-          userObject = { ...req.body };
         }
 
         // si l'on modifie l'image
@@ -126,6 +130,7 @@ exports.updateCurrentUser = async (req, res) => {
 
       // fonction qui met a jour et renvoie l'utilisateur
       async function updateAndSendNewUser() {
+        userObject.userName = userName;
         // sauvegarde du nouvelle utilisateur
         await User.updateOne({ _id: userId }, { ...userObject, _id: userId });
 

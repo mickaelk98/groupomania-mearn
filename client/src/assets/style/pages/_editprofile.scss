@@ -51,6 +51,20 @@
           margin-left: 10px;
         }
       }
+      &-password {
+        position: relative;
+      }
+      &-error {
+        color: var(--danger-1);
+        text-align: center;
+        margin-top: 5px;
+      }
+      &-logo {
+        position: absolute;
+        top: 35px;
+        right: 10px;
+        cursor: pointer;
+      }
       img {
         width: 100%;
         height: 250px;
