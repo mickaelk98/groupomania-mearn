@@ -4,13 +4,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Header from "components/Header/Header";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "context";
+import { useNavigate } from "react-router-dom";
 
 function EditProfil() {
   const { user, editProfil: editUser } = useContext(AuthContext);
   const [inputPasswordType, setInputPasswordType] = useState("password");
   const [file, setFile] = useState();
   const [imageUrl, setImageUrl] = useState(user.image);
-
+  const navigate = useNavigate();
   // affiche la preview de l'image
   useEffect(() => {
     if (file) {
@@ -59,6 +60,9 @@ function EditProfil() {
           return yup.string().notRequired();
         }
       }),
+      description: yup
+        .string()
+        .max(500, "Votre description doit faire maximun 500 caractères"),
     },
     [["password", "password"]]
   );
@@ -72,6 +76,7 @@ function EditProfil() {
     userName: user.userName,
     email: user.email,
     password: "",
+    description: user.description,
   };
 
   const {
@@ -90,9 +95,11 @@ function EditProfil() {
   async function editProfil(formValue) {
     try {
       clearErrors();
+      console.log(formValue);
       formValue.image = file;
       await editUser(user._id, formValue);
       reset();
+      navigate(`/profil/${user._id}`);
     } catch (e) {
       console.log(e);
       setError("userName", { type: "userName", message: e.userName });
@@ -157,6 +164,15 @@ function EditProfil() {
                 }}
                 className="fa-regular fa-eye-slash editprofil-main__form-logo"
               ></i>
+            )}
+          </div>
+          <div className="editprofil-main__form-item editprofil-main__form-description">
+            <label htmlFor="description">Votre description</label>
+            <textarea {...register("description")} id="description"></textarea>
+            {errors.description && (
+              <small className="editprofil-main__form-error">
+                {errors.description.message}
+              </small>
             )}
           </div>
 

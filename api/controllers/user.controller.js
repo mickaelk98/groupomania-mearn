@@ -76,7 +76,7 @@ exports.deleteCurrentUser = async (req, res) => {
 // controller pour modifier un utilisateur
 exports.updateCurrentUser = async (req, res) => {
   try {
-    const { password, email, userName } = req.body;
+    const { password, email, userName, description } = req.body;
     const { id: userId } = req.params;
     let userObject = {};
 
@@ -131,6 +131,7 @@ exports.updateCurrentUser = async (req, res) => {
       // fonction qui met a jour et renvoie l'utilisateur
       async function updateAndSendNewUser() {
         userObject.userName = userName;
+        userObject.description = description;
         // sauvegarde du nouvelle utilisateur
         await User.updateOne({ _id: userId }, { ...userObject, _id: userId });
 

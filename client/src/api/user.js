@@ -27,6 +27,7 @@ export async function editUser(userId, data) {
     fd.append("email", data.email);
     fd.append("password", data.password);
     fd.append("image", data.image);
+    fd.append("description", data.description);
 
     const response = await fetch(`${BASE_URL}/${userId}`, {
       method: "PUT",

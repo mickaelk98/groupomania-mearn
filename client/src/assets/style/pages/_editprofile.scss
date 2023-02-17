@@ -54,6 +54,13 @@
       &-password {
         position: relative;
       }
+      &-description {
+        textarea {
+          resize: none;
+          height: 140px;
+          outline: none;
+        }
+      }
       &-error {
         color: var(--danger-1);
         text-align: center;
