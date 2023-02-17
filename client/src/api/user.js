@@ -45,3 +45,22 @@ export async function editUser(userId, data) {
     throw e;
   }
 }
+
+// fonction pour supprimer un utilisateur
+export async function deleteUser(userId) {
+  try {
+    const response = await fetch(`${BASE_URL}/${userId}`, {
+      method: "DELETE",
+    });
+
+    const user = await response.json();
+
+    if (response.ok) {
+      return null;
+    } else {
+      throw user;
+    }
+  } catch (e) {
+    throw e;
+  }
+}

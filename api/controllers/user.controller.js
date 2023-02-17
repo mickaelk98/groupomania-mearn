@@ -68,7 +68,7 @@ exports.deleteCurrentUser = async (req, res) => {
       }
     }
   } catch (e) {
-    // console.log(e);
+    console.log(e);
     res.status(404).json(e);
   }
 };

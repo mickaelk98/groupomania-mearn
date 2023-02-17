@@ -5,6 +5,7 @@ import {
   editUser,
   login as connectUser,
   logout as disconnectUser,
+  deleteUser,
 } from "../api";
 
 function AuthProvider({ children }) {
@@ -26,8 +27,15 @@ function AuthProvider({ children }) {
     setUser(newUser);
   }
 
+  async function deleteCurrentUser(userId) {
+    const newUser = await deleteUser(userId);
+    setUser(newUser);
+  }
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, editProfil }}>
+    <AuthContext.Provider
+      value={{ user, login, logout, editProfil, deleteCurrentUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
