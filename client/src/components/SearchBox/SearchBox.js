@@ -23,7 +23,7 @@ function SearchBox() {
           placeholder="Rechercher un utilisateur"
         />
         <button type="button">
-          <i class="fa-solid fa-magnifying-glass"></i>
+          <i className="fa-solid fa-magnifying-glass"></i>
         </button>
       </form>
       <ul className={style.userlist}>

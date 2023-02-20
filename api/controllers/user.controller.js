@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 exports.getAllUsers = async (req, res) => {
   try {
     // recherche tout les utilisateur
-    const users = await User.find();
+    const users = await User.find().select("-password");
 
     if (users.length === 0) {
       res.status(200).json({ message: "Aucun utilisateur pour le moment" });
