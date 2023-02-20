@@ -8,31 +8,26 @@
     @include media.md {
       display: grid;
       grid-template-columns: auto 300px;
-      grid-template-rows: 450px auto;
       justify-content: center;
       grid-template-areas: 
         "new search"
-        "post search"
+
       ;
     }
     @include media.lg {
       display: grid;
-      grid-template-columns: 70% 30%;
-      grid-template-rows: 450px auto;
+      grid-template-columns: 70% 28%;
       justify-content: center;
       grid-template-areas: 
         "new search"
-        "post search"
       ;
     }
     @include media.xl {
       display: grid;
       grid-template-columns: 70% 30%;
-      grid-template-rows: 450px auto;
-      justify-content: center;
+      justify-content: space-between;
       grid-template-areas: 
         "new search"
-        "post search"
       ;
     }
     aside {

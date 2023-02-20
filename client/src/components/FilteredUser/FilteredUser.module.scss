@@ -4,16 +4,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 200px;
-  @include media.md {
-    width: 300px;
-  }
-  @include media.lg {
-    width: 300px;
-  }
-  @include media.xl {
-    width: 300px;
-  }
   padding: 5px;
   height: auto;
   border-radius: 10px;

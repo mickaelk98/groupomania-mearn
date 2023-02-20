@@ -19,11 +19,13 @@ function Homepage() {
     <div className="home">
       <Header />
       <main className="home__main container">
-        <NewPost />
+        <div className="home__main-post">
+          <NewPost />
+          <PostList />
+        </div>
         <aside>
           <SearchBox />
         </aside>
-        <PostList />
       </main>
     </div>
   );

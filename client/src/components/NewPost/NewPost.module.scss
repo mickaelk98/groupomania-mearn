@@ -6,9 +6,18 @@
   background: var(--secondary-color);
   width: 90%;
   padding: 10px;
+  @include media.sm {
+    width: 80%;
+  }
+  @include media.lg {
+    width: 70%;
+    max-width: 520px;
+  }
   @include media.xl {
-    width: 100%;
+    width: 80%;
+    max-width: 700px;
     padding: 0;
+    margin: 30px 0;
   }
   form {
     @include media.xl {
@@ -58,6 +67,17 @@
     margin: 0 auto;
     height: 170px;
     text-align: center;
+    @include media.sm {
+      height: 200px;
+      width: 80%;
+    }
+    @include media.lg {
+      height: 250px;
+    }
+    @include media.xl {
+      height: 300px;
+      width: 90%;
+    }
     img {
       width: 100%;
       height: calc(100% - 20px);

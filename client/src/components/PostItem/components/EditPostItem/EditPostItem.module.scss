@@ -1,3 +1,5 @@
+@use '../../../../assets/style/media';
+
 .editpostform {
   border: 1px solid var(--secondary-color);
   padding: 10px;
@@ -10,6 +12,15 @@
   .postimage {
     height: 180px;
     width: 100%;
+    @include media.sm {
+      height: 240px;
+    }
+    @include media.lg {
+      height: 260px;
+    }
+    @include media.xl {
+      height: 280px;
+    }
   }
   .image {
     text-align: center;

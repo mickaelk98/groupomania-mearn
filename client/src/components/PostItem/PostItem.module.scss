@@ -7,10 +7,17 @@
   margin: 0 auto 20px;
   background: #fff;
   border-radius: 10px;
+  @include media.sm {
+    width: 80%;
+  }
+  @include media.lg {
+    width: 70%;
+    max-width: 520px;
+  }
   @include media.xl {
-    width: 100%;
-    max-width: 1190px;
-    margin: 0;
+    width: 80%;
+    max-width: 650px;
+    margin: 0 0 20px;
   }
   .edititem {
     position: absolute;
@@ -48,6 +55,15 @@
   .postimage {
     width: 100%;
     height: 180px;
+    @include media.sm {
+      height: 250px;
+    }
+    @include media.lg {
+      height: 260px;
+    }
+    @include media.xl {
+      height: 300px;
+    }
   }
   .likecomment {
     display: flex;
