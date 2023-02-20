@@ -1,6 +1,57 @@
+@use '../media';
+
 .home {
   background: var(--background-color);
   &__main {
     min-height: 100vh;
+    margin: 0 auto;
+    @include media.md {
+      display: grid;
+      grid-template-columns: auto 300px;
+      grid-template-rows: 450px auto;
+      justify-content: center;
+      grid-template-areas: 
+        "new search"
+        "post search"
+      ;
+    }
+    @include media.lg {
+      display: grid;
+      grid-template-columns: 70% 30%;
+      grid-template-rows: 450px auto;
+      justify-content: center;
+      grid-template-areas: 
+        "new search"
+        "post search"
+      ;
+    }
+    @include media.xl {
+      display: grid;
+      grid-template-columns: 70% 30%;
+      grid-template-rows: 450px auto;
+      justify-content: center;
+      grid-template-areas: 
+        "new search"
+        "post search"
+      ;
+    }
+    aside {
+      display: none;
+      @include media.md {
+        display: block;
+        grid-area: search;
+        margin-top: 30px;
+      }
+      @include media.lg {
+        display: block;
+        grid-area: search;
+        margin-top: 30px;
+      }
+      @include media.xl {
+        display: block;
+        grid-area: search;
+        margin: 30px 0 0 30px
+      }
+    }
   }
 }

@@ -18,9 +18,11 @@ function Homepage() {
   return (
     <div className="home">
       <Header />
-      <main className="home__main">
+      <main className="home__main container">
         <NewPost />
-        <SearchBox />
+        <aside>
+          <SearchBox />
+        </aside>
         <PostList />
       </main>
     </div>
