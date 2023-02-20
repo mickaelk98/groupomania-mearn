@@ -31,9 +31,11 @@ export const selectFilteredUsers = selectorFamily({
   get:
     (filter) =>
     ({ get }) => {
-      const users = get(usersState)?.filter((user) =>
-        user.userName.toLocaleLowerCase().startsWith(filter)
-      );
-      return users;
+      if (filter.length >= 2) {
+        const users = get(usersState)?.filter((user) =>
+          user.userName.toLocaleLowerCase().startsWith(filter)
+        );
+        return users;
+      }
     },
 });
