@@ -7,11 +7,13 @@ import style from "./SearchBox.module.scss";
 function SearchBox() {
   const [filter, setFilter] = useState("");
   const sortedUsers = useRecoilValue(selectFilteredUsers(filter));
+  const [showSortedUsers, setShowSortedUser] = useState(false);
 
   console.log(sortedUsers);
 
   function handleInput(e) {
     setFilter(e.target.value.trim().toLowerCase());
+    setShowSortedUser(true);
   }
   return (
     <>
@@ -27,11 +29,12 @@ function SearchBox() {
         />
       </div>
       <ul className={style.userlist}>
-        {sortedUsers.map((user) => (
-          <li key={user._id}>
-            <FilteresUser user={user} />
-          </li>
-        ))}
+        {showSortedUsers &&
+          sortedUsers.map((user) => (
+            <li key={user._id} onClick={() => setShowSortedUser(false)}>
+              <FilteresUser user={user} />
+            </li>
+          ))}
       </ul>
     </>
   );
