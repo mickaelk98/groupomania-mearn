@@ -1,19 +1,12 @@
-import { useEffect } from "react";
-import { useLoaderData, useParams } from "react-router-dom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { selectSortUsers, usersState } from "state";
+import { useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { selectSortUsers } from "state";
 import style from "./ProfilCard.module.scss";
 
 function ProfilCard() {
-  const setUsersState = useSetRecoilState(usersState);
   const params = useParams();
   const userId = params.id;
-  const initialUsers = useLoaderData();
   const user = useRecoilValue(selectSortUsers(userId));
-
-  useEffect(() => {
-    setUsersState(initialUsers);
-  }, [initialUsers, setUsersState]);
 
   return (
     <>

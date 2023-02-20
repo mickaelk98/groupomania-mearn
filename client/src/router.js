@@ -17,6 +17,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        loader: fetchUsers,
         element: (
           <IsConnected>
             <Homepage />
@@ -25,7 +26,6 @@ export const router = createBrowserRouter([
       },
       {
         path: "/profil/:id",
-        loader: fetchUsers,
         element: (
           <IsConnected>
             <Profil />
