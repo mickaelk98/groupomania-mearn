@@ -10,6 +10,7 @@ services:
       context: ./api
       dockerfile: Dockerfile.prod
     environment:
+      - MODE=prod
       - HOSTNAME=groupomania.site
     restart: unless-stopped
   reverse-proxy:

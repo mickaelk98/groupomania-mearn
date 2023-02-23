@@ -13,6 +13,7 @@ services:
     ports:
       - 5000:80
     environment:
+      - MODE=dev
       - HOSTNAME=localhost:5000
   client:
     build:
