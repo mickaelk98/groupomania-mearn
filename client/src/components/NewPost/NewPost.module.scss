@@ -6,6 +6,7 @@
   background: var(--secondary-color);
   width: 90%;
   padding: 10px;
+  box-shadow: var(--box-shadow-card);
   @include media.sm {
     width: 80%;
   }

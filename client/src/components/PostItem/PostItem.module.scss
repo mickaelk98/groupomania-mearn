@@ -6,6 +6,7 @@
   padding: 10px;
   margin: 0 auto 20px;
   background: #fff;
+  box-shadow: var(--box-shadow-card);
   border-radius: 10px;
   @include media.sm {
     width: 80%;
